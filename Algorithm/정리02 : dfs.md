@@ -71,6 +71,40 @@ def dfs_stack(graph, start):
             stack.extend(reversed(graph[node]))
 ```
 
+```python
+# 작업 트리를 딕셔너리로 표현
+task_tree = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['E'],
+    'D': [],
+    'E': []
+}
+
+def dfs(task, visited=None):
+    if visited is None:
+        visited = []
+
+    visited.append(task)
+    print(f"작업 수행: {task}")
+
+    for next_task in task_tree[task]:
+        if next_task not in visited:
+            dfs(next_task, visited)
+
+    return visited
+
+# 루트 노드 'A'부터 시작
+dfs('A')
+
+        A
+       / \
+      B   C
+     /     \
+    D       E
+
+```
+
 ---
 
 ## 🔧 DFS의 시간 및 공간 복잡도
